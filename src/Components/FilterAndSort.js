@@ -40,6 +40,9 @@ const FilterSortContainer = styled.div`
 const CategoryContainer = styled.div`
   display: flex;
   gap: 10px;
+  @media (max-width: 890px) {
+    flex-wrap: wrap;
+}
 `;
 
 const CategoryButton = styled.button`
