@@ -73,19 +73,15 @@ code {
   color: white;
 }
 
-.sc-iCoHzw {
-  color: white;
-}
-.dVzifk {
-  background-color: black;
-}
 
-.sc-iCoHzw.dWKPGg {
-  background-color: black !important;
+.categories>div>button{
+  background-color: black;
+  color: white;
   border-radius: 20px;
   width: 170px;
   padding: 0.5rem 1rem;
 }
+
 
 .card {
   border: none;
@@ -115,5 +111,14 @@ code {
   .sort{
     flex-wrap: wrap;
     margin: 1rem;
+  }
+}
+
+@media (max-width: 1200) {
+  .stt{
+   margin-right: 5rem !important;
+  }
+  .stt>img{
+    margin-right: 5rem !important;
   }
 }
