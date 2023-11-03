@@ -1,5 +1,3 @@
-//App.js 
-
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProductList from './Components/ProductList';
@@ -33,10 +31,10 @@ const App = () => {
       </Container>
     </Router>
   );
-}
+};
 
 const Container = styled.div`
-  /* Your styling for the main container */
+
 `;
 
 export default App;

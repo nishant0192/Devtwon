@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import ProductItem from './ProductItem';
+import ContentLoader from 'react-content-loader';
 import styled from 'styled-components';
 
 const ProductList = ({ sortType, selectedCategory }) => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 6; // Update to display 3 products per page
+  const productsPerPage = 6;
 
   const fetchProducts = async () => {
     let url = 'https://fakestoreapi.com/products';
@@ -22,8 +24,14 @@ const ProductList = ({ sortType, selectedCategory }) => {
       const response = await fetch(url);
       const data = await response.json();
       setProducts(data);
+
+      // Simulate loading for a minimum of 2 seconds
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
     } catch (error) {
       console.error('Error fetching data:', error);
+      setLoading(false);
     }
   };
 
@@ -31,7 +39,7 @@ const ProductList = ({ sortType, selectedCategory }) => {
     fetchProducts();
   }, [selectedCategory]);
 
-  const handlePageChange = (pageNumber) => {
+  const handlePageChange = pageNumber => {
     setCurrentPage(pageNumber);
   };
 
@@ -51,11 +59,31 @@ const ProductList = ({ sortType, selectedCategory }) => {
   return (
     <ProductCard className="card">
       <ProductContainer className="row">
-        {displayedProducts.map(product => (
-          <div key={product.id} className="col-lg-4 col-md-6 mb-4">
-            <ProductItem product={product} />
-          </div>
-        ))}
+        {loading ? (
+          [1, 2, 3].map((_, index) => (
+            <div key={index} className="col-lg-4 col-md-6 mb-4">
+              <ContentLoader
+                speed={2}
+                width={400}
+                height={300}
+                viewBox="0 0 400 300"
+                backgroundColor="#f3f3f3"
+                foregroundColor="#ecebeb"
+              >
+                <rect x="0" y="0" rx="5" ry="5" width="100%" height="200" />
+                <rect x="0" y="210" rx="3" ry="3" width="70%" height="10" />
+                <rect x="0" y="230" rx="3" ry="3" width="60%" height="10" />
+                <rect x="0" y="250" rx="3" ry="3" width="50%" height="10" />
+              </ContentLoader>
+            </div>
+          ))
+        ) : (
+          displayedProducts.map(product => (
+            <div key={product.id} className="col-lg-4 col-md-6 mb-4">
+              <ProductItem product={product} />
+            </div>
+          ))
+        )}
       </ProductContainer>
       <Pagination>
         <ul className="pagination">
@@ -73,17 +101,16 @@ const ProductList = ({ sortType, selectedCategory }) => {
 };
 
 const ProductContainer = styled.div`
-  /* Your styling for product container */
+
 `;
 
 const ProductCard = styled.div`
-  width: 100%; /* Adjust this width as needed */
-  /* Other styles */
+  width: 100%;
+
 `;
 
 const Pagination = styled.div`
-  /* Your styling for pagination */
-  /* If you are using Bootstrap classes, you can style them here */
+
 `;
 
 export default ProductList;

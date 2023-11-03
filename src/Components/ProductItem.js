@@ -11,11 +11,10 @@ const ProductItem = ({ product }) => {
         <h5 className="card-title">{title}</h5>
         <p className="card-text">{description}</p>
         <button className="card-btn">Price: ${price}</button>
-        {/* Add buttons or actions for adding to cart, etc. */}
       </div>
     </ProductCard>
   );
-}
+};
 
 const ProductCard = styled.div`
   border: 1px solid #ddd;
@@ -29,16 +28,14 @@ const ProductCard = styled.div`
 `;
 
 const ProductImage = styled.img`
-  width: 10vw; 
+  width: 10vw;
   @media (max-width: 768px) {
-    height: 200px;
-    width:auto;
+    width:100%;
     object-fit:contain;
   }
 
   @media (max-width: 576px) {
-    height: 150px;
-    width:auto;
+    width:100%;
     object-fit:contain;
   }
 `;
